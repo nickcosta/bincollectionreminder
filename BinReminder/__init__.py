@@ -48,7 +48,10 @@ def send_sms(message, numbers):
     print("SMS Sent to:", numbers)
 
 
-def check_and_send_sms():
+def main(mytimer: func.TimerRequest):
+    if mytimer.past_due:
+        logging.info("The timer is past due!")
+
     today = datetime.date.today()
     next_day = today + datetime.timedelta(days=1)
     year = next_day.year
@@ -61,7 +64,3 @@ def check_and_send_sms():
                 bin_color = bin_schedule[year][month][day]
                 message = f"Reminder: Put out the {bin_color} bin now for tomorrow ({next_day.strftime('%Y-%m-%d')})."
                 send_sms(message, phone_numbers)
-
-
-if __name__ == "__main__":
-    check_and_send_sms()
