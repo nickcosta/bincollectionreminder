@@ -7,7 +7,7 @@
             "schedule": "0 50 14 * * *"
         }
     ],
-    "scriptFile": "__init__.py",  // Update with your script file name if it's different
-    "entryPoint": "check_and_send_sms"  // Name of your function in the script
+    "scriptFile": "__init__.py",
+    "entryPoint": "check_and_send_sms"
 }
 
