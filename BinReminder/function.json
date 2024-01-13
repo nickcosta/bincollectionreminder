@@ -4,7 +4,7 @@
         "name": "mytimer",
         "type": "timerTrigger",
         "direction": "in",
-        "schedul": "0 52 09 * * *"
+        "schedul": "0 27 10 * * *"
       }
     ]
   }
