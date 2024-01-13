@@ -47,7 +47,7 @@ def send_sms(message, numbers):
             print(f"SMS Sent to: {number}, SID: {message.sid}")
         except Exception as e:
             print(f"Failed to send SMS to {number}: {e}")
-    print("SMS Sent to:", numbers)
+        print("SMS Sent to:", numbers)
 
 
 def check_and_send_sms():
