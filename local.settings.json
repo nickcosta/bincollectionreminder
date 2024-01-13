@@ -3,7 +3,7 @@
   "Values": {
     "FUNCTIONS_EXTENSION_VERSION": "~4",
     "FUNCTIONS_WORKER_RUNTIME": "python",
-    "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName=your_account_name;AccountKey=your_account_key;EndpointSuffix=core.windows.net",
+    "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName=binsstorage;AccountKey=Ms2Luu4CIBOKU3W21XgqCChhZb9u5NVvCLDAp42EloA/EQTFLTjzoVf1s0NwkB/ZZSTQPBhT+aCk+AStx7PsUA==;EndpointSuffix=core.windows.net",
     "APPLICATIONINSIGHTS_CONNECTION_STRING": "InstrumentationKey=489b6009-54ad-4c40-9b51-e711a518826e;IngestionEndpoint=https://uksouth-1.in.applicationinsights.azure.com/;LiveEndpoint=https://uksouth.livediagnostics.monitor.azure.com/",
     "AzureWebJobsSecretStorageType": "files",
     "SCM_DO_BUILD_DURING_DEPLOYMENT": "1",
