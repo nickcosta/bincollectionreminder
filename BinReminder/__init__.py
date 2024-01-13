@@ -49,8 +49,6 @@ def send_sms(message, numbers):
 
 
 def main(mytimer: func.TimerRequest):
-    if mytimer.past_due:
-        logging.info("The timer is past due!")
 
     today = datetime.date.today()
     next_day = today + datetime.timedelta(days=1)
