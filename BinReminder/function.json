@@ -8,6 +8,7 @@
         }
     ],
     "scriptFile": "__init__.py",
-    "entryPoint": "check_and_send_sms"
+    "entryPoint": "main" // Updated entryPoint to "main" to match the new function name
 }
+
 
