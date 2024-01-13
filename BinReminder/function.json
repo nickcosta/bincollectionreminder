@@ -4,7 +4,7 @@
             "name": "mytimer",
             "type": "timerTrigger",
             "direction": "in",
-            "schedule": "0 45 13 * * *"
+            "schedule": "0 50 14 * * *"
         }
     ],
     "scriptFile": "__init__.py",  // Update with your script file name if it's different
