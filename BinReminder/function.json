@@ -8,7 +8,7 @@
         }
     ],
     "scriptFile": "__init__.py",
-    "entryPoint": "main" // Updated entryPoint to "main" to match the new function name
+    "entryPoint": "main"
 }
 
 
