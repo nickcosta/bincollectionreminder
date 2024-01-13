@@ -16,6 +16,7 @@ bin_schedule = {
             2: "test",
             3: "brown",
             10: "black",
+            13: "black",
             17: "blue",
             24: "black",
             31: "brown",
