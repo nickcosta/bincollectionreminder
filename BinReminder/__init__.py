@@ -46,9 +46,15 @@ def get_next_bin_color(previous_color):
     """
     Get the next bin color based on the previous bin color.
     """
-    current_index = bin_pattern.index(previous_color)
-    next_index = (current_index + 1) % len(bin_pattern)
-    return bin_pattern[next_index]
+    if previous_color == "blue":
+        return "black"
+    elif previous_color == "black":
+        next_index = (bin_pattern.index(previous_color, bin_pattern.index(previous_color) + 1) % len(bin_pattern)) + 1
+        return bin_pattern[next_index % len(bin_pattern)]
+    elif previous_color == "brown":
+        return "black"
+    else:
+        return "blue"  # default to blue if previous_color is not in the expected values
 
 def main(mytimer: func.TimerRequest):
     next_day = datetime.date.today() + datetime.timedelta(days=1)
