@@ -1,2 +1,3 @@
 azure-functions
 twilio
+azure-storage-blob
