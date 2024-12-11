@@ -9,54 +9,47 @@ auth_token = os.environ["TWILIO_AUTH_TOKEN"]
 twilio_phone_number = os.environ["TWILIO_PHONE_NUMBER"]
 phone_numbers = os.environ["PHONE_NUMBERS"].split(";")
 
-# Define the bin color pattern
-bin_pattern = ["blue", "black", "brown", "black"]
+# Bin pattern in the exact sequence required
+bin_pattern = ["black", "blue", "black", "brown"]
 
-# Environment variable to store the previous bin color
-PREVIOUS_BIN_COLOR = "PREVIOUS_BIN_COLOR"
+# Environment variable that will store the current index
+CURRENT_INDEX_VAR = "CURRENT_INDEX"
+
+def get_current_index():
+    val = os.environ.get(CURRENT_INDEX_VAR, "")
+    if val.isdigit():
+        idx = int(val)
+        return idx % len(bin_pattern)
+    # Default to 0 (black) if not set or invalid
+    return 0
+
+def set_current_index(idx):
+    # This will NOT persist in Azure after the function finishes!
+    # It only updates the in-memory environment for the current execution.
+    os.environ[CURRENT_INDEX_VAR] = str(idx)
 
 def send_sms(message, numbers):
-    """
-    Send an SMS to a list of phone numbers.
-    """
     client = Client(account_sid, auth_token)
     for number in numbers:
         try:
-            message = client.messages.create(
+            msg = client.messages.create(
                 to=number, from_=twilio_phone_number, body=message
             )
-            print(f"SMS Sent to: {number}, SID: {message.sid}")
+            print(f"SMS Sent to: {number}, SID: {msg.sid}")
         except Exception as e:
             print(f"Failed to send SMS to {number}: {e}")
     print("SMS Sent to:", numbers)
 
-def get_previous_bin_color():
-    """
-    Get the previous bin color from the environment variable.
-    """
-    return os.environ.get(PREVIOUS_BIN_COLOR, "black")
-
-def set_previous_bin_color(color):
-    """
-    Set the previous bin color to the environment variable.
-    """
-    os.environ[PREVIOUS_BIN_COLOR] = color
-
-def get_next_bin_color(previous_color):
-    if previous_color in bin_pattern:
-        current_index = bin_pattern.index(previous_color)
-    else:
-        # If not found, default to the start of the pattern
-        current_index = -1
-    next_index = (current_index + 1) % len(bin_pattern)
-    return bin_pattern[next_index]
-
 def main(mytimer: func.TimerRequest):
+    current_index = get_current_index()
+    # Move to the next index in the cycle
+    next_index = (current_index + 1) % len(bin_pattern)
+    next_color = bin_pattern[next_index]
+
+    # Update the "env variable" for the current run
+    set_current_index(next_index)
+
+    # Prepare the reminder message
     next_day = datetime.date.today() + datetime.timedelta(days=1)
-
-    previous_color = get_previous_bin_color()
-    next_color = get_next_bin_color(previous_color)
-    set_previous_bin_color(next_color)
-
     message = f"Reminder: Put out the {next_color} bin now for tomorrow ({next_day.strftime('%Y-%m-%d')})."
     send_sms(message, phone_numbers)
